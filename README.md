@@ -1,7 +1,7 @@
 
 ## Task Management
 
-Technology used : Laravel 12 , Redis , Postgres 15.
+Technology used : Laravel 12 , Redis , Postgres 15 and Docker
 
 ### How to run app:
 1. `docker compose up --build`
