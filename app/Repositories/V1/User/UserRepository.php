@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
-   public function getUsers(array $filters): Collection
+    public function getUsers(array $filters): Collection
     {
         $cacheKey = 'users:' . md5(json_encode(Arr::sortRecursive($filters)));
 
@@ -19,11 +19,11 @@ class UserRepository
                 return User::query()
                     ->when(
                         Arr::get($filters, 'email'),
-                        fn ($q) => $q->where('email', Arr::get($filters, 'email'))
+                        fn($q) => $q->where('email', Arr::get($filters, 'email'))
                     )
                     ->when(
                         Arr::get($filters, 'name'),
-                        fn ($q) => $q->where('name', 'LIKE', '%' . Arr::get($filters, 'name') . '%')
+                        fn($q) => $q->where('name', 'LIKE', '%' . Arr::get($filters, 'name') . '%')
                     )
                     ->get();
             });
@@ -44,7 +44,7 @@ class UserRepository
     public function update(User $user, array $data): User
     {
         if (Arr::get($data, 'password')) {
-            Arr::set($data, 'password', $this->hashPassword($data));
+            $data = Arr::set($data, 'password', $this->hashPassword($data));
         }
 
         $user->update($data);

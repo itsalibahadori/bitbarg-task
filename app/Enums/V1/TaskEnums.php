@@ -29,6 +29,9 @@ enum TaskEnums: int
 
     public static function allowedForUpdate(): array
     {
-        return [self::PENDING->name, self::COMPLETED->name];
+        return array_map(
+            fn (self $case) => $case->name,
+            self::cases(),
+        );
     }
 }
